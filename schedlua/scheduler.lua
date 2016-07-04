@@ -62,7 +62,7 @@ end
 -- when it's ready to run.
 --MY EDIT: added priority as 4th parameter in scheduleTask, and in print below
 function Scheduler.scheduleTask(self, task, params, priority)
-	print("Scheduler.scheduleTask: ", task, params, priority)
+	--print("Scheduler.scheduleTask: ", task, params, priority)
 	params = params or {}
 	--added priority, if none set to 1 (lowest priority, 5 is highest)
 	--if out of bounds, set to 1 or 5
@@ -91,7 +91,7 @@ end
 
 
 function Scheduler.removeFiber(self, fiber)
-	print("REMOVING DEAD FIBER: ", fiber);
+	--print("REMOVING DEAD FIBER: ", fiber);
 	return true;
 end
 
