@@ -28,7 +28,7 @@ local Scheduler_mt = {
 }
 
 function Scheduler.init(self, ...)
-	--print("==== Scheduler.init ====")
+	print("==== Scheduler.init ====")
 	local obj = {
 		TasksReadyToRun = Queue();
 	}
@@ -61,7 +61,7 @@ end
 -- The 'params' is a table of parameters which will be passed to the function
 -- when it's ready to run.
 function Scheduler.scheduleTask(self, task, params)
-	--print("Scheduler.scheduleTask: ", task, params)
+	print("Scheduler.scheduleTask: ", task, params)
 	params = params or {}
 	
 	if not task then
@@ -78,7 +78,7 @@ end
 
 
 function Scheduler.removeFiber(self, fiber)
-	--print("REMOVING DEAD FIBER: ", fiber);
+	print("REMOVING DEAD FIBER: ", fiber);
 	return true;
 end
 
@@ -116,7 +116,7 @@ function Scheduler.step(self)
 	-- We assume that some other part of the system is responsible for
 	-- keeping track of the task, and rescheduling it when appropriate.
 	if task.state == "suspended" then
-		--print("suspended task wants to run")
+		print("suspended task wants to run")
 		return true;
 	end
 
