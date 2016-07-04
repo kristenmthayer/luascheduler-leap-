@@ -60,16 +60,29 @@ end
 -- metamethod implemented.
 -- The 'params' is a table of parameters which will be passed to the function
 -- when it's ready to run.
-function Scheduler.scheduleTask(self, task, params)
-	print("Scheduler.scheduleTask: ", task, params)
+--MY EDIT: added priority as 4th parameter in scheduleTask, and in print below
+function Scheduler.scheduleTask(self, task, params, priority)
+	print("Scheduler.scheduleTask: ", task, params, priority)
 	params = params or {}
+	--added priority, if none set to 1 (lowest priority, 5 is highest)
+	--if out of bounds, set to 1 or 5
+	priority = priority or 1
+	if priority > 5 then
+		 priority = 5
+	end
+	if priority < 1 then
+		priority = 1
+	end
 	
 	if not task then
 		return false, "no task specified"
 	end
 
 	task:setParams(params);
-	self.TasksReadyToRun:enqueue(task);	
+	--MY EDIT add task to queue as many times as the priority number.
+	for count = 1, priority do
+		self.TasksReadyToRun:enqueue(task);
+	end
 	task.state = "readytorun"
 
 	return task;
