@@ -10,10 +10,16 @@ local function getNewTaskID()
 	return taskID;
 end
 
-local function spawn(scheduler, func, ...)
+--func is the function that is going to run,
+--priority is MY ADDED PARAMETER for the priority level of the task
+--for priority, high number = HIGH PRIORITY, range of priorities is 1-5
+--5 is highest priority, 1 is lowest priority
+-- ... is the parameters that func is going to take.
+local function spawn(scheduler, func, priority, ...)
+--MY CHANGE: passed priority level as parameter to scheduler
 	local task = Task(func, ...)
 	task.TaskID = getNewTaskID();
-	scheduler:scheduleTask(task, {...});
+	scheduler:scheduleTask(task, priority, {...});
 	
 	return task;
 end
@@ -48,8 +54,10 @@ local function task2()
 end
 
 local function main()
-	local t1 = spawn(Scheduler, task1)
-	local t2 = spawn(Scheduler, task2)
+--I ADDED: priority levels 3 and 1. 
+--For this test to be successful, Level 3 should run faster than level 1.
+	local t1 = spawn(Scheduler, task1, 3)
+	local t2 = spawn(Scheduler, task2, 1)
 
 	while (true) do
 		--print("STATUS: ", t1:getStatus(), t2:getStatus())
