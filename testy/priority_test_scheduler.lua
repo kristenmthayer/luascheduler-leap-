@@ -19,7 +19,7 @@ local function spawn(scheduler, func, priority, ...)
 --MY CHANGE: passed priority level as parameter to scheduler
 	local task = Task(func, ...)
 	task.TaskID = getNewTaskID();
-	scheduler:scheduleTask(task, priority, {...});
+	scheduler:scheduleTask(task, {...}, priority);
 	
 	return task;
 end
