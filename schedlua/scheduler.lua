@@ -82,8 +82,8 @@ function Scheduler.scheduleTask(self, task, params, priority)
 	--MY EDIT add task to queue as many times as the priority number.
 	for count = 1, priority do
 		self.TasksReadyToRun:enqueue(task);
+		task.state = "readytorun"
 	end
-	task.state = "readytorun"
 
 	return task;
 end
